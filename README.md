@@ -39,6 +39,10 @@ The component heirarchy starts off with the navbar and routes from the App.js. T
 * Upload images
 * Comment on messages
 * Update styling
+* Incoming notifications
+* Comment threads
+* Group messages
+* A-frame
 
 ## Technologies Used
 - Rails
