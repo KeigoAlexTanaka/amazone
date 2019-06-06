@@ -1,5 +1,5 @@
 # DISCOURSE
-A full stack chat app using React and Ruby on Rails.
+A full stack chat app using React and Express.
 
 ## About the App
 The purpose of this app is to be able to communicate with other users using an interface similar to that of Slack or Discord.
@@ -45,30 +45,31 @@ The component heirarchy starts off with the navbar and routes from the App.js. T
 * A-frame
 
 ## Technologies Used
-- Rails
-- React
+- Express
+- Node.js
+- React.js
 - PostgreSQL
 - JavaScript
 - HTML5
 - CSS3
+- Socket.io
 
 ## Deployment
 Link will be provided once project is completed: 
 
 If however you fork and/or clone the repo, this is the process to run it:
 
-*Must have rails installed in system*
-
 **Must be done in the root folder:**
 ```
-    rails db:create           
-    rails db:seed             
-    rails server  
+    npm run db:init           
+    npm run db:reset
+    npm run db:seed           
+    npm start
 ```            
 
 **Must be done in the client folder:**
 ```
-    npm install axios
+    npm install
     npm start
 ```
 
