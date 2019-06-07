@@ -22,12 +22,17 @@ usersRoute.get('/:id',async(req,res)=>{
 usersRoute.post('/signup', async(req, res, next) => {
   passport.authenticate('signup', async(err, user, info) => {
     try {
-      console.log('user from /signup', user);
+      // if (err || !user) {
+      //   res.send(req.body)
+      //   const error = new Error('An Error Occurred');
+      //   return next(error);
+      // } 
       const createdUser = await Users.create(req.body);
       const { email, id } = createdUser;
       const token = jwtSign({email,id})
       return res.json({token,id})
     } catch(error) {
+      res.send(error)
       return next(error)
     }
   })(req, res, next)
@@ -37,6 +42,7 @@ usersRoute.post('/login',async(req,res,next)=>{
   passport.authenticate('login', async(err, user, info) => {
     try {
       if (err || !user) {
+        res.send(info)
         const error = new Error('An Error Occurred');
         return next(error);
       }
@@ -48,6 +54,7 @@ usersRoute.post('/login',async(req,res,next)=>{
       })
 
     } catch(error) {
+      res.send(error,info)
       return next(error);
     }
   })(req, res, next)

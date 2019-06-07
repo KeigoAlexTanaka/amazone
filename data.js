@@ -44,12 +44,12 @@ const users = [
   },
   {
     "name": "alex",
-    "email": "example2e@gmail.com",
+    "email": "example2@gmail.com",
     "password": "123456"
   },
   {
     "name": "tanaka",
-    "email": "example3e@gmail.com",
+    "email": "example3@gmail.com",
     "password": "123456"
   },
 ]

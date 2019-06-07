@@ -13,15 +13,12 @@ passport.use('signup', new LocalStrategy ({
 }, async (email, password, done) => {
   try {
     const user = await Users.create({ email: email, password: password })
-
     if (!user) {
       return done(null, false, { message: 'Unable to sign up user'})
     }
-
-    done(null, user)
-
+    done(null, false,user)
   } catch(error) {
-    done(error)
+    return done(null,false,error)
   }
 }))
 passport.use('login', new LocalStrategy({
@@ -30,16 +27,13 @@ passport.use('login', new LocalStrategy({
 }, async (email, password, done) => {
   try {
     // find user by their email
-    console.log(Users,'****')
-    const user = await Users.findOne({ where: { email: email }})
-    console.log(user,'$%#$%#$%')
+    const user = await Users.findOne({ where: { email }})
     if (!user) {
       return done(null, false, { message: 'User not found'})
     }
 
     // compare passwords
     const validate = await bcrypt.compare(password, user.password);
-    console.log(validate,'validate')
     if (!validate) {
       return done(null, false, { message: 'Wrong password'})
     }
@@ -48,7 +42,8 @@ passport.use('login', new LocalStrategy({
     return done(null, user, { message: 'Logged in successfully'})
 
   } catch(error) {
-    return done(error)
+      console.log(error.message);
+      // return done(error)
   }
 }))
 

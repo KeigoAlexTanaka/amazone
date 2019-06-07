@@ -1,26 +1,25 @@
-const app = require('express')();
-const http = require('http').createServer(app);
+const express = require("express");
 const cors = require("cors");
-const bodyParser = require("body-parser");
-const morgan = require("morgan");
-const passport = require("passport");
+let bodyParser = require("body-parser");
+const usersRoute = require("./routes/userRoute");
 const messageRoute = require("./routes/messageRoute");
 const channelRoute = require("./routes/channelRoute");
-const usersRoute = require("./routes/userRoute");
-const io = require('socket.io')(http);
+const morgan = require("morgan");
+const passport = require("passport");
 const PORT = process.env.PORT || 4567;
-
+const app = express();
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
 app.use(morgan("combined"));
+app.use(bodyParser.json({ limit: "50mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(cors());
 app.use(passport.initialize());
 app.use("/messages", messageRoute);
 app.use("/channels", channelRoute);
 app.use("/users", usersRoute);
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
+http.listen(4567, function(){
+  console.log(`listening on *:${PORT}`);
 });
 
 io.on('connection', function(socket){
@@ -31,8 +30,4 @@ io.on('connection', function(socket){
   socket.on('disconnect', function(){
     console.log('user disconnected');
   });
-});
-
-http.listen(4567, function(){
-  console.log(`listening on *:${PORT}`);
 });
