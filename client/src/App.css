@@ -1,16 +1,16 @@
 .flex{
-  display:flex
+  display:flex;
 }
 
-.test{
+.layout{
   background-color:rgb(94, 94, 94);
 }
 
-.test3{
+.layout3{
   background-color:rgb(185, 185, 185);
 }
 
-.test2{
+.layout2{
   height:85vh;
   overflow-y: auto;
   overflow-wrap: break-word;
@@ -19,6 +19,14 @@
   padding:.5em 0;
 }
 
+.click:hover{
+  cursor: pointer;
+}
+
 .padding{
   padding:.5em 0;
+}
+
+.fullscreen{
+  height:100vh;
 }

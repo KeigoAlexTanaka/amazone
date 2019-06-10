@@ -11,17 +11,7 @@ messageRoute.get('/',async(req,res)=>{
     res.status(500).json({ msg: e.status });
   }
 })
-// messageRoute.get('/:id',async(req,res)=>{
-//   try{
-//     const id = req.params.id;
-//     const message = await Messages.findByPk(id,{
-//       include:[{all: true}]
-//     });
-//     res.json(message);
-//   }catch(e){
-//     res.status(404).json({ msg: e.status });
-//   }
-// })
+
 messageRoute.post('/create',async(req,res)=>{
   try{
     let decoded = jwtDecode(req.headers.token);
@@ -44,6 +34,7 @@ messageRoute.post('/create',async(req,res)=>{
     res.json({ message: e.message });
   }
 })
+
 messageRoute.delete('/delete/:id',async(req,res)=>{
   try{
     let decoded = jwtDecode(req.headers.token);
@@ -64,6 +55,7 @@ messageRoute.delete('/delete/:id',async(req,res)=>{
     res.send(e.message)    
   }
 })
+
 messageRoute.put('/edit/:id',async(req,res)=>{
   try{
     let decoded = jwtDecode(req.headers.token);

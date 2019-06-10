@@ -22,11 +22,6 @@ usersRoute.get('/:id',async(req,res)=>{
 usersRoute.post('/signup', async(req, res, next) => {
   passport.authenticate('signup', async(err, user, info) => {
     try {
-      // if (err || !user) {
-      //   res.send(req.body)
-      //   const error = new Error('An Error Occurred');
-      //   return next(error);
-      // } 
       const createdUser = await Users.create(req.body);
       const { email, id } = createdUser;
       const token = jwtSign({email,id})
